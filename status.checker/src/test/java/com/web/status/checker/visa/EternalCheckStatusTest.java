@@ -89,7 +89,7 @@ public class EternalCheckStatusTest {
      */
     private void sendMessageTelegramBot(String message) {
         // Create your bot passing the token received from @BotFather
-        TelegramBot bot = new TelegramBot("5445144170:AAH-zbHLAbGRhyF0IptPyJH1JhfKJ5xDvTw");
+        TelegramBot bot = new TelegramBot("change bot token here");
 
         // Register for updates
         bot.setUpdatesListener(updates -> {
@@ -99,7 +99,7 @@ public class EternalCheckStatusTest {
         });
 
         // Send messages
-        long chatId = 342962942;
+        long chatId = 0000000; //change here to chat id!
         SendResponse response = bot.execute(new SendMessage(chatId, message));
     }
 
