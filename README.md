@@ -7,4 +7,7 @@ firefox browser
 maven
 telegram botFather keys from this article: https://rieckpil.de/howto-send-telegram-bot-notifications-with-java/
 
+TO RUN:
+start the test. or mvn clean install.
+
 enjoy:D
