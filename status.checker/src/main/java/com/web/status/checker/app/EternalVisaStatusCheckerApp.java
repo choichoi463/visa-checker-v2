@@ -86,7 +86,7 @@ public class EternalVisaStatusCheckerApp {
      */
     private void sendMessageTelegramBot(String message) {
         // Create your bot passing the token received from @BotFather
-        TelegramBot bot = new TelegramBot("5445144170:AAH-zbHLAbGRhyF0IptPyJH1JhfKJ5xDvTw"); // set yours auth key
+        TelegramBot bot = new TelegramBot("set yours auth key"); // set yours auth key
 
         // Register for updates
         bot.setUpdatesListener(updates -> {
