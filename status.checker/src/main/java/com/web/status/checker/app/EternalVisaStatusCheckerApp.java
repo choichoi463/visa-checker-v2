@@ -85,7 +85,7 @@ public class EternalVisaStatusCheckerApp {
      */
     private void sendMessageTelegramBot(String message) {
         // Create your bot passing the token received from @BotFather
-        TelegramBot bot = new TelegramBot("5445144170:AAH-zbHLAbGRhyF0IptPyJH1JhfKJ5xDvTw");
+        TelegramBot bot = new TelegramBot("set yours auth key here");
 
         // Register for updates
         bot.setUpdatesListener(updates -> {
@@ -95,7 +95,7 @@ public class EternalVisaStatusCheckerApp {
         });
 
         // Send messages
-        long chatId = 342962942;
+        long chatId = 342962942; //set yours chat id
         SendResponse response = bot.execute(new SendMessage(chatId, message));
     }
 
