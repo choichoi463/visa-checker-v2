@@ -65,11 +65,12 @@ public class EternalVisaStatusCheckerApp {
                 log.info("Bro, checking if webdriver is still started before closing.");
                 if (WebDriverRunner.hasWebDriverStarted()) {
                     log.info("Bro, closing webdriver.");
-                    WebDriverRunner.closeWindow();
+//                    WebDriverRunner.closeWindow();
                     WebDriverRunner.closeWebDriver();
                     log.info("Bro, webdriver closed.");
                 }
 //                Selenide.closeWebDriver();
+//                log.info("Bro, webdriver closed.");
                 log.info("Bro, going to sleep long time now z.z.z.z");
                 Thread.sleep(720000); //12 minutes 720000
                 log.info("Bro, timeout between restarts passed.");
@@ -85,7 +86,7 @@ public class EternalVisaStatusCheckerApp {
      */
     private void sendMessageTelegramBot(String message) {
         // Create your bot passing the token received from @BotFather
-        TelegramBot bot = new TelegramBot("set yours auth key here");
+        TelegramBot bot = new TelegramBot("5445144170:AAH-zbHLAbGRhyF0IptPyJH1JhfKJ5xDvTw"); // set yours auth key
 
         // Register for updates
         bot.setUpdatesListener(updates -> {
