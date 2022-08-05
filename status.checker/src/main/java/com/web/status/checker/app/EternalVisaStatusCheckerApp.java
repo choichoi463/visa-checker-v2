@@ -1,9 +1,6 @@
 package com.web.status.checker.app;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
+import com.codeborne.selenide.*;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -17,10 +14,11 @@ import java.util.Date;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.web.status.checker.model.Constants.*;
-import static com.web.status.checker.model.pages.VisaBelWebPage.*;
 
 @Log4j2
 public class EternalVisaStatusCheckerApp {
+
+    private final String BASE_URL = "https://visa.vfsglobal.com/blr/ru/pol/book-an-appointment";
 
     public EternalVisaStatusCheckerApp() throws InterruptedException {
         int i = 1;
@@ -36,15 +34,16 @@ public class EternalVisaStatusCheckerApp {
                 log.info("Bro, starting test run #" + i);
                 Selenide.open(BASE_URL);
                 log.info("Bro, base url opened.");
-                Thread.sleep(10000); //TODO experimental to increase stability. not needed actually here.
-                $(".lets-get-started").shouldBe(Condition.visible);
-                $(".lets-get-started").scrollIntoView(true);
-                $(".lets-get-started").click();
+                Thread.sleep(10000);
+                SelenideElement registerButton = $(".lets-get-started");
+                registerButton.shouldBe(Condition.visible);
+                registerButton.scrollIntoView(true);
+                registerButton.click();
                 switchTo().window(1);
                 Thread.sleep(2500);
                 log.info("Bro, checking registration page now:");
                 if (!$(byText("Access denied")).exists()) {
-                    log.info("Bro," + ACCESS_GRANTED_MESSAGE + " " + getDateTimeNow());
+                    log.warn("Bro," + ACCESS_GRANTED_MESSAGE + " " + getDateTimeNow() + GO_TO_URL_MESSAGE);
                     sendMessageTelegramBot(ACCESS_GRANTED_MESSAGE + " " + getDateTimeNow() + GO_TO_URL_MESSAGE);
                     Selenide.screenshot("it_worked_" + System.currentTimeMillis());
 
@@ -53,7 +52,7 @@ public class EternalVisaStatusCheckerApp {
                     $(".just to fail").shouldBe(Condition.visible);
                 } else {
                     if ($(byText("Access denied")).exists()) {
-                        log.warn("Bro," + ACCESS_DENIED_MESSAGE + " " + getDateTimeNow());
+                        log.info("Bro," + ACCESS_DENIED_MESSAGE + " " + getDateTimeNow());
                     }
                 }
             } catch (Exception e) {
@@ -65,18 +64,20 @@ public class EternalVisaStatusCheckerApp {
                 log.info("Bro, checking if webdriver is still started before closing.");
                 if (WebDriverRunner.hasWebDriverStarted()) {
                     log.info("Bro, closing webdriver.");
-//                    WebDriverRunner.closeWindow();
                     WebDriverRunner.closeWebDriver();
                     log.info("Bro, webdriver closed.");
                 }
-//                Selenide.closeWebDriver();
-//                log.info("Bro, webdriver closed.");
-                log.info("Bro, going to sleep long time now z.z.z.z");
-                Thread.sleep(720000); //12 minutes 720000
+                log.info("Bro, going to sleep long time now z.z.z.z test run#" + i);
+                Thread.sleep(720000); //12 minutes is 720000 millis
                 log.info("Bro, timeout between restarts passed.");
                 i++;
             }
         }
+    }
+
+    public EternalVisaStatusCheckerApp(String message) {
+        sendMessage(message);
+        log.info("Bro, telegram message sent " + message);
     }
 
     /**
@@ -111,8 +112,8 @@ public class EternalVisaStatusCheckerApp {
         return formatter.format(date);
     }
 
-    public void onExit() {
-        sendMessageTelegramBot("тест остановился совсем, pls restart. " + " " + getDateTimeNow());
+    public void sendMessage(String message) {
+        sendMessageTelegramBot(message + " " + getDateTimeNow());
     }
 
 }
