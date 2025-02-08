@@ -99,6 +99,7 @@ public class Application {
                     String HOORAY_MESSAGE = "Hooray, there is no ui alert, so take a look now yourself and register!";
                     Selenide.screenshot("it_worked_" + System.currentTimeMillis());
                     log.info(HOORAY_MESSAGE);
+                    // TODO add a sound notification here would be cool
                     Telegram.sendMessage(HOORAY_MESSAGE);
                     try {
                         if (firstUserRegistered == false) {
