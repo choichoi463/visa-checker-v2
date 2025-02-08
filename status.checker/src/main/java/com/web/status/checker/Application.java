@@ -65,7 +65,7 @@ public class Application {
      * @throws Exception
      */
     private static void runObywatelstwoRegistrationPageChecker() throws Exception {
-        String waveFile = "C:\\zaibatsu\\visa-checker-v2\\status.checker\\src\\main\\resources\\amen.wav";
+        String waveFile = "C:\\paste your path to the wave file here\\file.wav";
         boolean firstUserRegistered = false;
         boolean secondUserRegistered = false;
         int count = 0;
