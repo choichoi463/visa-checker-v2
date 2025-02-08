@@ -2,7 +2,6 @@ package com.web.status.checker;
 
 import com.codeborne.selenide.*;
 import com.web.status.checker.app.EternalVisaStatusCheckerApp;
-import com.web.status.checker.helpers.AudioPlayer;
 
 import com.web.status.checker.helpers.Telegram;
 import com.web.status.checker.model.UserDataObywatel;
@@ -65,7 +64,6 @@ public class Application {
      * @throws Exception
      */
     private static void runObywatelstwoRegistrationPageChecker() throws Exception {
-        String waveFile = "C:\\paste your path to the wave file here\\file.wav";
         boolean firstUserRegistered = false;
         boolean secondUserRegistered = false;
         int count = 0;
@@ -101,7 +99,7 @@ public class Application {
                     String HOORAY_MESSAGE = "Hooray, there is no ui alert, so take a look now yourself and register!";
                     Selenide.screenshot("it_worked_" + System.currentTimeMillis());
                     log.info(HOORAY_MESSAGE);
-                    AudioPlayer.playSound(waveFile);
+                    // TODO add a sound notification here would be cool
                     Telegram.sendMessage(HOORAY_MESSAGE);
                     try {
                         if (firstUserRegistered == false) {
